@@ -1,0 +1,10 @@
+.idea/*
+output/*
+data
+data/*
+**.ipynb_checkpoints/*
+**.pytest_cache
+.ipynb_checkpoints/*
+temp/*
+__pycache__/
+*.pyc
