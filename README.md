@@ -13,6 +13,11 @@ Samuel, Atzmon and Chechik, ["Long tail learning with attributes"](http://arxiv.
 - tensorflow 1.14.0
 - keras 2.2.5
 
+Quick installation under Anaconda:
+```
+conda env create -f requirements.yml
+```
+
 ## Data Preparation
 Datasets: CUB, SUN and AWA.  
 Download `data.tar` from [here](https://chechiklab.biu.ac.il/~dvirsamuel/DRAGON/data.tar), untar it and place it under the **project root directory**.
@@ -29,28 +34,29 @@ DRAGON
 ```
 
 ## Train Experts and Fusion Module
+**Reproduce results for `DRAGON` and its modules (Table 1, rows 7-9 in our paper):**  
 Training and evaluation should be according to the training protocol described in our paper (Section 5 - *training*):
-1. First, Train each expert without the hold-out set (partial training set) by executing the following commands:
+1. First, train each expert without the hold-out set (partial training set) by executing the following commands:
     - CUB:
         ```
         # Visual-Expert training
-        PYTHONPATH="./" python visual_expert\main.py --base_train_dir=./checkpoints/CUB --dataset_name=CUB --transfer_task=DRAGON --train_dist=dragon --data_dir=data --batch_size=64 --max_epochs=100 --initial_learning_rate=0.0003 --l2=0.005
+        PYTHONPATH="./" python visual_expert/main.py --base_train_dir=./checkpoints/CUB --dataset_name=CUB --transfer_task=DRAGON --train_dist=dragon --data_dir=data --batch_size=64 --max_epochs=100 --initial_learning_rate=0.0003 --l2=0.005
         # Attribute-Expert training 
-        PYTHONPATH="./" python attribute_expert\main.py --base_train_dir=./checkpoints/CUB --dataset_name=CUB --transfer_task=DRAGON --data_dir=data --train_dist=dragon --batch_size=64 --max_epochs=100 --initial_learning_rate=0.001 --LG_beta=1e-7 --LG_lambda=0.0001 --SG_gain=3 --SG_psi=0.01 --SG_num_K=-1
+        PYTHONPATH="./" python attribute_expert/main.py --base_train_dir=./checkpoints/CUB --dataset_name=CUB --transfer_task=DRAGON --data_dir=data --train_dist=dragon --batch_size=64 --max_epochs=100 --initial_learning_rate=0.001 --LG_beta=1e-7 --LG_lambda=0.0001 --SG_gain=3 --SG_psi=0.01 --SG_num_K=-1
         ```
     - SUN:
         ```
         # Visual-Expert training
-        PYTHONPATH="./" python visual_expert\main.py --base_train_dir=./checkpoints/SUN --dataset_name=SUN --transfer_task=DRAGON --train_dist=dragon --data_dir=data --batch_size=64 --max_epochs=100 --initial_learning_rate=0.0001 --l2=0.01
+        PYTHONPATH="./" python visual_expert/main.py --base_train_dir=./checkpoints/SUN --dataset_name=SUN --transfer_task=DRAGON --train_dist=dragon --data_dir=data --batch_size=64 --max_epochs=100 --initial_learning_rate=0.0001 --l2=0.01
         # Attribute-Expert training 
-        PYTHONPATH="./" python attribute_expert\main.py --base_train_dir=./checkpoints/SUN --dataset_name=SUN --transfer_task=DRAGON --data_dir=data --train_dist=dragon --batch_size=64 --max_epochs=100 --initial_learning_rate=0.001 --LG_beta=1e-6 --LG_lambda=0.001 --SG_gain=10 --SG_psi=0.01 --SG_num_K=-1
+        PYTHONPATH="./" python attribute_expert/main.py --base_train_dir=./checkpoints/SUN --dataset_name=SUN --transfer_task=DRAGON --data_dir=data --train_dist=dragon --batch_size=64 --max_epochs=100 --initial_learning_rate=0.001 --LG_beta=1e-6 --LG_lambda=0.001 --SG_gain=10 --SG_psi=0.01 --SG_num_K=-1
         ```
     - AWA:
         ```
         # Visual-Expert training
-        PYTHONPATH="./" python visual_expert\main.py --base_train_dir=./checkpoints/AWA1 --dataset_name=AWA1 --transfer_task=DRAGON --train_dist=dragon --data_dir=data --batch_size=64 --max_epochs=100 --initial_learning_rate=0.0003 --l2=0.1
+        PYTHONPATH="./" python visual_expert/main.py --base_train_dir=./checkpoints/AWA1 --dataset_name=AWA1 --transfer_task=DRAGON --train_dist=dragon --data_dir=data --batch_size=64 --max_epochs=100 --initial_learning_rate=0.0003 --l2=0.1
         # Attribute-Expert training 
-        PYTHONPATH="./" python attribute_expert\main.py --base_train_dir=./checkpoints/AWA1 --dataset_name=AWA1 --transfer_task=DRAGON --data_dir=data --train_dist=dragon --batch_size=64 --max_epochs=100 --initial_learning_rate=0.001 --LG_beta=0.001 --LG_lambda=0.001 --SG_gain=1 --SG_psi=0.01 --SG_num_K=-1
+        PYTHONPATH="./" python attribute_expert/main.py --base_train_dir=./checkpoints/AWA1 --dataset_name=AWA1 --transfer_task=DRAGON --data_dir=data --train_dist=dragon --batch_size=64 --max_epochs=100 --initial_learning_rate=0.001 --LG_beta=0.001 --LG_lambda=0.001 --SG_gain=1 --SG_psi=0.01 --SG_num_K=-1
         ```
 2. Then, re-train each expert, with the hold-out set (full train set) by executing above commands with the `--test_mode` flag as a parameter.
 3. Rename `Visual-lr=0.0003_l2=0.005` to `Visual` and `LAGO-lr=0.001_beta=1e-07_lambda=0.0001_gain=3.0_psi=0.01` to `LAGO` (this is essential since the `FusionModule` finds trained experts by their names, without extensions).
