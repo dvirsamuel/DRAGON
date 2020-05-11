@@ -76,6 +76,23 @@ Training and evaluation should be according to the training protocol described i
       ```
 5. Finally, evaluate the fusion-module with fully-trained experts, by executing step 4 commands with the `--test_mode` flag as a parameter.
 
+## Pre-trained Models and Checkpoints
+Download `checkpoints.tar` from [here](https://chechiklab.biu.ac.il/~dvirsamuel/DRAGON/checkpoints.tar), untar it and place it under the **project root directory**.
+```
+checkpoints
+  |--CUB
+      |--Visual
+      |--LAGO
+      |--Dual2ParametricRescale-lr=0.005_freeze=1_sort=1_topk=-1_f=2_s=(2, 2)
+  |--SUN
+      |--Visual
+      |--LAGO
+      |--Dual4ParametricRescale-lr=0.0005_freeze=1_sort=1_topk=-1_f=2_s=(2, 2)
+  |--AWA1
+      |--Visual
+      |--LAGO
+      |--Dual4ParametricRescale-lr=0.005_freeze=1_sort=1_topk=-1_f=2_s=(2, 2)
+```
 
 ## Cite Our Paper
 If you find our paper and repo useful, please cite:
