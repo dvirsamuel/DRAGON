@@ -1,10 +1,9 @@
-# DRAGON: Long tail learning with attributes
+# DRAGON: From Generalized zero-shot learning to long-tail with class descriptors
 [Paper](http://arxiv.org/abs/2004.02235)  
 [Project Website](https://chechiklab.biu.ac.il/~dvirsamuel/DRAGON/)
 
 ## Overview
-`DRAGON` is a novel modular architecture for long-tail learning, designed to address the "familiarity bias", as described in our paper:
-Samuel, Atzmon and Chechik, ["Long tail learning with attributes"](http://arxiv.org/abs/2004.02235).
+`DRAGON` learns to correct the bias towards head classes on a sample-by-sample basis; and fuse information from class-descriptions to improve the tail-class accuracy, as described in our paper: Samuel, Atzmon and Chechik, ["From Generalized zero-shot learning to long-tail with class descriptors"](http://arxiv.org/abs/2004.02235).
 
 ## Requirements
 - numpy  1.15.4
@@ -34,7 +33,7 @@ DRAGON
 ```
 
 ## Train Experts and Fusion Module
-**Reproduce results for `DRAGON` and its modules (Table 1, rows 7-9 in our paper):**  
+**Reproduce results for `DRAGON` and its modules (Table 1 in our paper):**  
 Training and evaluation should be according to the training protocol described in our paper (Section 5 - *training*):
 1. First, train each expert without the hold-out set (partial training set) by executing the following commands:
     - CUB:
