@@ -1,6 +1,7 @@
 # DRAGON: From Generalized zero-shot learning to long-tail with class descriptors
 [Paper](http://arxiv.org/abs/2004.02235)  
-[Project Website](https://chechiklab.biu.ac.il/~dvirsamuel/DRAGON/)
+[Project Website](https://chechiklab.biu.ac.il/~dvirsamuel/DRAGON/)  
+[Video](https://www.youtube.com/watch?v=sFfbVopSOEs&t=2s)
 
 ## Overview
 `DRAGON` learns to correct the bias towards head classes on a sample-by-sample basis; and fuse information from class-descriptions to improve the tail-class accuracy, as described in our paper: Samuel, Atzmon and Chechik, ["From Generalized zero-shot learning to long-tail with class descriptors"](http://arxiv.org/abs/2004.02235).
@@ -96,9 +97,9 @@ checkpoints
 ## Cite Our Paper
 If you find our paper and repo useful, please cite:
 ```
-@inproceedings{samuel2020longtail,
-  title={Long-tail learning with attributes},
-  author={Dvir Samuel and Yuval Atzmon and Gal Chechik},
-  booktitle={arXiv preprint arXiv:2004.02235}
-  year={2020}}
+@InProceedings{samuel2020longtail,
+  author    = {Samuel, Dvir and Atzmon, Yuval and Chechik, Gal},
+  title     = {From Generalized Zero-Shot Learning to Long-Tail With Class Descriptors},
+  booktitle = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year      = {2021}}
 ```
