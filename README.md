@@ -60,7 +60,7 @@ Training and evaluation should be according to the training protocol described i
         ```
 2. Then, re-train each expert, with the hold-out set (full train set) by executing above commands with the `--test_mode` flag as a parameter.
 3. Rename `Visual-lr=0.0003_l2=0.005` to `Visual` and `LAGO-lr=0.001_beta=1e-07_lambda=0.0001_gain=3.0_psi=0.01` to `LAGO` (this is essential since the `FusionModule` finds trained experts by their names, without extensions).
-4. Train the fusion-module on trained experts by running the following commands:
+4. Train the fusion-module on partially trained experts (models from step 1) by running the following commands:
 
     - CUB:
       ```
@@ -74,7 +74,7 @@ Training and evaluation should be according to the training protocol described i
       ```
       PYTHONPATH="./" python fusion/main.py --base_train_dir=./checkpoints/AWA1 --dataset_name=AWA1 --data_dir=data --initial_learning_rate=0.005 --batch_size=64 --max_epochs=50 --sort_preds=1 --freeze_experts=1 --nparams=4
       ```
-5. Finally, evaluate the fusion-module with fully-trained experts, by executing step 4 commands with the `--test_mode` flag as a parameter.
+5. Finally, evaluate the fusion-module with fully-trained experts (models from step 2), by executing step 4 commands with the `--test_mode` flag as a parameter.
 
 ## Pre-trained Models and Checkpoints
 Download `checkpoints.tar` from [here](https://chechiklab.biu.ac.il/~dvirsamuel/DRAGON/checkpoints.tar), untar it and place it under the **project root directory**.
